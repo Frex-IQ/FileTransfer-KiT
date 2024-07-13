@@ -22,6 +22,8 @@ http://127.0.0.1:5000/
   <a href="#" target="_blank">
   <img src="https://github.com/Frex-IQ/FileTransfer-KiT/blob/main/Screenshot.png?raw=true"  />
 </div>
+   
+---
 
 <div align="center">
   <a href="https://www.youtube.com/channel/UCbDmI8zZKUGbFlAo39-SiqQ" target="_blank">
@@ -34,5 +36,7 @@ http://127.0.0.1:5000/
     <img src="https://img.shields.io/static/v1?message=Telegram&logo=telegram&label=&color=2CA5E0&logoColor=white&labelColor=&style=for-the-badge" height="30" alt="telegram logo"  />
   </a>
 </div>
+
+---
     
 © 2024 Frex IQ. All rights reserved.
