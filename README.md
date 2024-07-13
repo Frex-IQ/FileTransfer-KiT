@@ -23,6 +23,16 @@ http://127.0.0.1:5000/
   <img src="https://github.com/Frex-IQ/FileTransfer-KiT/blob/main/Screenshot.png?raw=true"  />
 </div>
 
-
+<div align="left">
+  <a href="https://www.youtube.com/channel/UCbDmI8zZKUGbFlAo39-SiqQ" target="_blank">
+    <img src="https://img.shields.io/static/v1?message=Youtube&logo=youtube&label=&color=FF0000&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="youtube logo"  />
+  </a>
+  <a href="https://chat.whatsapp.com/BUVRFJ0pTUCKYXW8VN2Ivn" target="_blank">
+    <img src="https://img.shields.io/static/v1?message=Whatsapp&logo=whatsapp&label=&color=25D366&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="whatsapp logo"  />
+  </a>
+  <a href="https://t.me/+YOkX4ktlWadmOTRl" target="_blank">
+    <img src="https://img.shields.io/static/v1?message=Telegram&logo=telegram&label=&color=2CA5E0&logoColor=white&labelColor=&style=for-the-badge" height="35" alt="telegram logo"  />
+  </a>
+</div>
     
 © 2024 Frex IQ. All rights reserved.
