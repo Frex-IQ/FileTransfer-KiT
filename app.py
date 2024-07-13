@@ -29,8 +29,11 @@ def upload_file():
     
     if file and allowed_file(file.filename):
         filename = file.filename
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        return 'File uploaded successfully'
+        try:
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return 'File uploaded successfully'
+        except Exception as e:
+            return f'Error uploading file: {e}'
     else:
         return 'File upload failed'
 
