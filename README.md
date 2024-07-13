@@ -1,3 +1,8 @@
+<div align="center">
+  <a href="https://www.youtube.com/channel/UCbDmI8zZKUGbFlAo39-SiqQ" target="_blank">
+  <img src="Frex IQ Banner.png"  />
+</div>
+
 # To run our project locally on http://127.0.0.1:5000/, you'll need to set up a simple server. Here’s how to do it using Flask, a popular Python web framework.
 
 ## Step-by-Step Guide
