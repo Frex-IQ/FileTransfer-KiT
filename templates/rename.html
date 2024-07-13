@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/Logo.png"> <!-- Corrected link for favicon -->
+    <title>Rename File</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        p span{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Rename File: {{ filename }}</h1>
+    <form action="/rename/{{ filename }}" method="post">
+        <label for="new_name">New Name:</label>
+        <input type="text" id="new_name" name="new_name" required>
+        <script>
+            // JavaScript to populate the input field with the filename
+            var filename = "{{ filename }}"; // Replace with actual filename or logic to retrieve it
+            var inputField = document.getElementById('new_name');
+            inputField.value = filename; // Populate the input with the filename
+        </script>
+        <p>warning :<span> Please avoid changing the file name extension.</span></p>
+        <button type="submit">Rename</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileTransfer KiT</title>
+    <link rel="icon" href="images/Logo.png"> <!-- Corrected link for favicon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://unpkg.com/ionicons@latest/dist/ionicons.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #333; /* Dark background color */
+            color: #fff; /* White text color */
+            text-align: center;
+        }
+        h1 {
+            margin-top: 40px;
+            margin-bottom: 30px;
+            font-size: 36px;
+            color: #00b3b3; /* Cyan heading color */
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #444; /* Darker background for container */
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Light shadow for container */
+        }
+        .file-upload {
+            border: 2px dashed #00b3b3; /* Cyan dashed border */
+            padding: 30px;
+            cursor: pointer;
+            display: inline-block;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+            width: calc(100% - 60px); /* Adjusted width */
+            max-width: 600px; /* Max width for larger screens */
+            border-radius: 8px;
+        }
+        .file-upload.dragover {
+            border-color: #007f92; /* Darker cyan on drag over */
+        }
+        .file-upload p {
+            margin: 0;
+            font-size: 18px;
+            color: #ccc; /* Light gray text color */
+        }
+        .file-upload label {
+            display: block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background-color: #00b3b3; /* Cyan background for label */
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            color: #fff; /* White text color */
+            font-size: 16px;
+        }
+        .file-upload label:hover {
+            background-color: #007f92; /* Darker cyan on hover */
+        }
+        #file-name {
+            margin-bottom: 10px;
+            color: #00b3b3; /* Cyan text color */
+            font-size: 16px;
+        }
+        .success-message {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .error-message {
+            background-color: #ff4545;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .upload-btn {
+            padding: 12px 25px;
+            background-color: #00b3b3; /* Cyan background */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            color: #fff; /* White text color */
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .upload-btn:hover {
+            background-color: #007f92; /* Darker cyan on hover */
+        }
+        a {
+            color: #00b3b3; /* Cyan link color */
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #007f92; /* Darker cyan on hover */
+        }
+
+        section {
+            padding: 50px;
+            min-height: 100vh;
+        }
+
+        footer {
+            padding: 20px;
+            text-align: center;
+            background-color: #090505;
+            color: #fff;
+        }
+
+        footer .social-icons {
+            margin-top: 10px;
+        }
+
+        footer .social-icons a {
+            font-size: 1.5rem;
+            color: #fff;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="container">
+            <h1>FileTransfer <span>KiT</span></h1>
+
+            <!-- File upload section -->
+            <div class="file-upload" id="file-drop" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleFileDrop(event)">
+                <p>Drag and drop your file here</p>
+                <label for="file">or Choose File</label>
+                <input type="file" name="file" id="file" style="display: none;" onchange="handleFileSelect(event)">
+            </div>
+
+            <!-- Display selected file name -->
+            <div id="file-name"></div>
+
+            <!-- Upload success message -->
+            <div class="success-message" id="success-msg">File uploaded successfully!</div>
+
+            <!-- Upload error message -->
+            <div class="error-message" id="error-msg">Please select a file to upload.</div>
+
+            <!-- Form for file upload -->
+            <button type="button" class="upload-btn" onclick="uploadFile()">Upload</button>
+
+            <h2><a href="/list">View All Uploaded Files</a></h2>
+            
+            <!-- Buttons to view photos and videos -->
+            <h2>View Uploaded:</h2>
+            <button class="upload-btn" onclick="location.href='/photos'" type="button">Photos</button>
+            <button class="upload-btn" onclick="location.href='/videos'" type="button">Videos</button>
+        </div>
+
+        <!-- JavaScript for file handling -->
+        <script>
+            function handleFileSelect(event) {
+                const file = event.target.files[0];
+                const fileName = file.name;
+                document.getElementById("file-name").textContent = "Selected file: " + fileName;
+            }
+
+            function handleDragOver(event) {
+                event.preventDefault();
+                event.dataTransfer.dropEffect = "copy";
+                document.getElementById("file-drop").classList.add("dragover");
+            }
+
+            function handleDragLeave(event) {
+                document.getElementById("file-drop").classList.remove("dragover");
+            }
+
+            function handleFileDrop(event) {
+                event.preventDefault();
+                document.getElementById("file-drop").classList.remove("dragover");
+
+                const file = event.dataTransfer.files[0];
+                if (file) {
+                    const fileName = file.name;
+                    document.getElementById("file-name").textContent = "Selected file: " + fileName;
+                    document.getElementById("error-msg").style.display = "none"; // Hide error message
+                }
+            }
+
+            function uploadFile() {
+                const fileInput = document.getElementById("file");
+                const file = fileInput.files[0];
+                if (file) {
+                    const formData = new FormData();
+                    formData.append("file", file);
+
+                    const xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/upload");
+                    xhr.onload = function() {
+                        if (xhr.status === 200) {
+                            document.getElementById("success-msg").style.display = "block";
+                            document.getElementById("error-msg").style.display = "none";
+                            document.getElementById("file-name").textContent = ""; // Clear file name display
+                        } else {
+                            alert("Error uploading file. Please try again.");
+                        }
+                    };
+                    xhr.send(formData);
+                } else {
+                    document.getElementById("error-msg").style.display = "block";
+                }
+            }
+        </script>
+    </section>
+
+    <footer>
+        <h4>FileTransfer KiT: Simplify Your File Management</h4>
+        <p>Upload: Send files from your computer to our server.</p>
+        <p>Manage: View, download, rename, and delete files easily.</p>
+        <p>Explore: Separate sections for photos and videos.</p>
+        <p>&copy; 2024 Frex IQ. All rights reserved.</p>
+        <div class="social-icons">
+            <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+            <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+            <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+            <a href="#"><ion-icon name="logo-linkedin"></ion-icon></a>
+            <a href="#"><ion-icon name="logo-google"></ion-icon></a>
+            <a href="#"><ion-icon name="logo-youtube"></ion-icon></a>
+        </div>
+        <p>Need help? Contact <a href="mailto:frexiq60@gmail.com">frexiq60@gmail.com</a>.</p>
+    </footer>
+
+</body>
+</html>

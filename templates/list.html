@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/Logo.png"> <!-- Corrected link for favicon -->    <title>Uploaded Files</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+        }
+        .file-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+        .file-item {
+            width: 200px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            position: relative; /* Added for positioning icons */
+        }
+        .file-item img, .file-item video {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .file-item .file-name {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #ccc;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .file-item .file-actions {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+        }
+        .file-item .file-actions a, .file-item .file-actions button {
+            margin: 0 5px;
+            color: #fff;
+            text-decoration: none;
+            background-color: #59a8a2;
+            padding: 5px 8px; /* Adjusted padding for smaller buttons */
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            font-size: 12px; /* Adjusted font size for smaller buttons */
+        }
+        .file-item .file-actions button.rename {
+            background-color: #4caf50; /* Green color for rename button */
+        }
+        .file-item .file-actions button.delete {
+            background-color: #ff4545; /* Red color for delete button */
+        }
+        .file-item .file-actions button i {
+            margin-right: 5px;
+        }
+        .search-box {
+            margin-bottom: 20px;
+        }
+        .search-box input[type="text"] {
+            padding: 5px;
+            width: 200px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Uploaded Files</h1>
+
+    <!-- Search Box -->
+    <div class="search-box">
+        <input type="text" id="file-search" placeholder="Search files..." oninput="filterFiles()">
+    </div>
+
+    <div class="file-list">
+        {% for file in files %}
+        <div class="file-item" data-name="{{ file }}">
+            {% if file.lower().endswith(('.png', '.jpg', '.jpeg', '.gif')) %}
+                <img src="/download/{{ file }}" alt="{{ file }}">
+            {% elif file.lower().endswith(('.mp4', '.avi', '.mov')) %}
+                <video controls>
+                    <source src="/download/{{ file }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            {% else %}
+                <p>Preview not available for this file type.</p>
+            {% endif %}
+            <div class="file-name">{{ file }}</div>
+            <div class="file-actions">
+                <a href="/download/{{ file }}" download><i class="fas fa-download"></i> Download</a>
+                <button class="rename" onclick="renameFile('{{ file }}')"><i class="fas fa-edit"></i> Rename</button>
+                <button class="delete" onclick="confirmDelete('{{ file }}')"><i class="fas fa-trash-alt"></i> Delete</button>
+                <form id="delete-form-{{ file }}" action="/delete/{{ file }}" method="post" style="display: none;">
+                    <input type="submit" value="Delete">
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- JavaScript function for renaming file -->
+    <script>
+        function renameFile(filename) {
+            var newName = prompt("Enter new name for " + filename + ":");
+            if (newName) {
+                // Assuming you have a Flask route to handle renaming
+                window.location.href = "/rename/" + filename + "?new_name=" + newName;
+            }
+        }
+
+        function confirmDelete(filename) {
+            var confirmation = confirm("Are you sure you want to delete " + filename + "?");
+            if (confirmation) {
+                document.getElementById('delete-form-' + filename).submit();
+            }
+        }
+
+        function filterFiles() {
+            var input, filter, files, fileContainer, fileItems, file, i, txtValue;
+            input = document.getElementById("file-search");
+            filter = input.value.toUpperCase();
+            fileContainer = document.getElementsByClassName("file-list")[0];
+            fileItems = fileContainer.getElementsByClassName("file-item");
+            
+            for (i = 0; i < fileItems.length; i++) {
+                file = fileItems[i];
+                txtValue = file.getAttribute("data-name");
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    file.style.display = "";
+                } else {
+                    file.style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
