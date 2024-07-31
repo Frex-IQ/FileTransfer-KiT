@@ -3,6 +3,13 @@
 
 ## Step-by-Step Guide
 
+Clone the project
+
+```bash
+  git clone https://link-to-project
+```
+
+
 ### 1. Install Flask:
 If you haven't installed Flask yet, you can do so using pip. Open your terminal or command prompt and run:
 ```cmd
