@@ -6,7 +6,7 @@
 Clone the project
 
 ```bash
-  git clone gh repo clone Frex-IQ/FileTransfer-KiT
+  git clone https://github.com/Frex-IQ/FileTransfer-KiT.git
 ```
 
 
