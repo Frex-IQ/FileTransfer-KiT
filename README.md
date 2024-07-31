@@ -25,6 +25,7 @@ http://127.0.0.1:5000/
    
 ---
 
+
 <div align="center">
   <a href="https://www.youtube.com/channel/UCbDmI8zZKUGbFlAo39-SiqQ" target="_blank">
     <img src="https://img.shields.io/static/v1?message=Youtube&logo=youtube&label=&color=FF0000&logoColor=white&labelColor=&style=for-the-badge" height="30" alt="youtube logo"  />
@@ -37,6 +38,9 @@ http://127.0.0.1:5000/
   </a>
 </div>
 
----
-    
+  <div align="center">  
 © 2024 Frex IQ. All rights reserved.
+
+For support, email frexiq60@gmail.com</div>
+
+
