@@ -75,8 +75,7 @@ Open your terminal or command prompt, navigate to the directory where your app.p
 python app.py
 ```
 
-### 3. Go this URL :
-http://127.0.0.1:5000/
+### 3. Go this URL : http://127.0.0.1:5000/
 
 <div align="center">
   <a href="#" target="_blank">
