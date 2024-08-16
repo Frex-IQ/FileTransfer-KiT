@@ -1,5 +1,8 @@
 
 # To run our project locally on http://127.0.0.1:5000/, you'll need to set up a simple server. Here’s how to do it using Flask, a popular Python web framework.
+<a href="https://www.youtube.com/watch?v=TUG2CJPDluM&t=nUaRLRS3CluVlFFh" target="_blank">
+  <img src="https://github.com/user-attachments/assets/652df1e4-0c85-40a9-b596-e144dcfd9b0c" alt="Video preview">
+</a>
 
 ## Step-by-Step Guide
 
@@ -76,6 +79,7 @@ python app.py
 ```
 
 ### 3. Go this URL : http://127.0.0.1:5000/
+
 
 <div align="center">
   <a href="#" target="_blank">
